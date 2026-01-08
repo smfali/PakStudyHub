@@ -1,0 +1,20 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// 1. Detect if we are running in a GitHub Actions environment
+const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
+
+// 2. Extract the repository name from the environment variable
+// GitHub gives this as "username/Pakstudy-Hub"
+const repoName = process.env.GITHUB_REPOSITORY 
+  ? process.env.GITHUB_REPOSITORY.split('/')[1] 
+  : '';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  // 3. Set the base path
+  // Local: '/'
+  // GitHub: '/Pakstudy-Hub/'
+  base: isGithubActions ? `/${repoName}/` : '/',
+})
