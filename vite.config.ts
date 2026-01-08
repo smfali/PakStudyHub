@@ -10,11 +10,18 @@ const repoName = process.env.GITHUB_REPOSITORY
   ? process.env.GITHUB_REPOSITORY.split('/')[1] 
   : '';
 
+// 🔍 DEBUG LOGS: This will show up in the GitHub Actions terminal
+console.log('--- DEBUG INFO ---');
+console.log('isGithubActions:', isGithubActions);
+console.log('repoName:', repoName);
+console.log('Final Base Path:', isGithubActions ? `/${repoName}/` : '/');
+console.log('------------------');
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   // 3. Set the base path
   // Local: '/'
   // GitHub: '/Pakstudy-Hub/'
-  base: isGithubActions ? `/${repoName}/` : '/',
+  base: '/Pakstudy-Hub/',
 })
